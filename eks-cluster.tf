@@ -11,7 +11,17 @@ module "eks" {
 
   eks_managed_node_group_defaults = {
     disk_size = 50
+  }
 
+  node_security_group_additional_rules = {
+    inress_ec2_tcp = {
+      description                = "Open pulsar access in private network"
+      protocol                   = "tcp"
+      from_port                  = 80
+      to_port                    = 80
+      type                       = "ingress"
+      cidr_blocks            = var.private_subnets
+    }
   }
 
   eks_managed_node_groups = {
@@ -31,21 +41,18 @@ module "eks" {
       min_size     = var.workers_instance_count_saltstack
       max_size     = var.workers_instance_count_saltstack
 
-
-
       instance_types = [var.worker_instance_type_saltstack]
       capacity_type  = "SPOT"
     }
+
     divy = {
       name         = "divy"
       desired_size = var.workers_instance_count_divy
       min_size     = var.workers_instance_count_divy
       max_size     = var.workers_instance_count_divy
 
-
       instance_types = [var.worker_instance_type_divy]
-
-      capacity_type = "SPOT"
+      capacity_type  = "SPOT"
     }
 
     security = {
@@ -54,11 +61,10 @@ module "eks" {
       min_size     = var.workers_instance_count_security
       max_size     = var.workers_instance_count_security
 
-
-
       instance_types = [var.worker_instance_type_security]
       capacity_type  = "SPOT"
     }
+
     mysql = {
       name         = "mysql"
       desired_size = var.workers_instance_count_mysql
@@ -68,12 +74,12 @@ module "eks" {
       instance_types = [var.worker_instance_type_mysql]
       capacity_type  = "SPOT"
     }
+
     pulsar = {
       name         = "pulsar"
       desired_size = var.workers_instance_count_pulsar
       min_size     = var.workers_instance_count_pulsar
       max_size     = var.workers_instance_count_pulsar
-
 
       instance_types = [var.worker_instance_type_pulsar]
       capacity_type  = "SPOT"
@@ -85,20 +91,20 @@ module "eks" {
       min_size     = var.workers_instance_count_mongo-db
       max_size     = var.workers_instance_count_mongo-db
 
-
       instance_types = [var.worker_instance_type_mongo-db]
       capacity_type  = "SPOT"
     }
+
     microservices = {
       name         = "microservices"
       desired_size = var.workers_instance_count_microservice
       min_size     = var.workers_instance_count_microservice
       max_size     = var.workers_instance_count_microservice
 
-
       instance_types = [var.worker_instance_type_microservice]
       capacity_type  = "SPOT"
     }
+
     monitoring = {
       name         = "monitoring"
       desired_size = var.workers_instance_count_monitoring

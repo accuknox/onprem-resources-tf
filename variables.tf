@@ -31,14 +31,37 @@ variable "database_subnets" {
 }
 
 /*
-  SES domain
+  SES config
 */
 
-variable domain {
-  type        = string
-  default     = "achref.com"
+variable "domain" {
+  type    = string
+  default = "www.accuknox.com"
 }
 
+variable "name" {
+  type        = string
+  description = "Name of the IAM user"
+  default     = "smpt"
+}
+
+variable "user_policy_name_prefix" {
+  type        = string
+  description = "Name prefix of the IAM policy that is assigned to the user"
+  default     = "SESSendOnlyAccess"
+}
+
+variable "path" {
+  type        = string
+  description = "Path in which to create the user"
+  default     = null
+}
+
+variable "permissions_boundary" {
+  type        = string
+  description = "The ARN of the policy that is used to set the permissions boundary for the user"
+  default     = null
+}
 
 /*
   VPC variables
@@ -173,7 +196,7 @@ variable "soarcast_elasticache_id" {
 
 variable "soarcast_elasticache_parameter_group_name" {
   type    = string
-  default = "default.redis6.x"
+  default = "default.redis7"
 }
 
 variable "soarcast_elasticache_node_type" {
@@ -249,3 +272,5 @@ variable "db_instance_class" {
   default = "db.t3.micro"
   type    = string
 }
+
+

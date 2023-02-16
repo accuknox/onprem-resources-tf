@@ -3,8 +3,8 @@
 */
 
 resource "aws_security_group" "efs" {
-   name = "accuknox-saas"
-   vpc_id = module.vpc.vpc_id
+  name   = "accuknox-saas"
+  vpc_id = module.vpc.vpc_id
 }
 
 resource "aws_security_group_rule" "efs-tcp-rule" {
@@ -29,46 +29,62 @@ resource "aws_security_group_rule" "allow_all" {
    Divy EFS 1
 */
 
-module "divy1"{
-   source = "./efs"
-   name= "divy1"
-   cidr = var.cidr
-   sec-grp-id = aws_security_group.efs.id
-   private_subnets = var.private_subnets
+module "divy1" {
+  source          = "./efs"
+  name            = "divy1"
+  cidr            = var.cidr
+  sec-grp-id      = aws_security_group.efs.id
+  private_subnets = module.vpc.private_subnets
+
+  depends_on = [
+    module.vpc
+  ]
 }
 
 /*
    Divy EFS 1
 */
 
-module "divy2"{
-   source = "./efs"
-   name= "divy2"
-   cidr = var.cidr
-   sec-grp-id = aws_security_group.efs.id
-   private_subnets = var.private_subnets
+module "divy2" {
+  source          = "./efs"
+  name            = "divy2"
+  cidr            = var.cidr
+  sec-grp-id      = aws_security_group.efs.id
+  private_subnets = module.vpc.private_subnets
+
+  depends_on = [
+    module.vpc
+  ]
 }
 
 /*
    SoarCast EFS
 */
 
-module "soarcast"{
-   source = "./efs"
-   name= "soarcast"
-   cidr = var.cidr
-   sec-grp-id = aws_security_group.efs.id
-   private_subnets = var.private_subnets
+module "soarcast" {
+  source          = "./efs"
+  name            = "soarcast"
+  cidr            = var.cidr
+  sec-grp-id      = aws_security_group.efs.id
+  private_subnets = module.vpc.private_subnets
+
+  depends_on = [
+    module.vpc
+  ]
 }
 
 /*
    saltmaster EFS
 */
 
-module "saltmaster"{
-   source = "./efs"
-   name= "saltmaster"
-   cidr = var.cidr
-   sec-grp-id = aws_security_group.efs.id
-   private_subnets = var.private_subnets
+module "saltmaster" {
+  source          = "./efs"
+  name            = "saltmaster"
+  cidr            = var.cidr
+  sec-grp-id      = aws_security_group.efs.id
+  private_subnets = module.vpc.private_subnets
+
+  depends_on = [
+    module.vpc
+  ]
 }

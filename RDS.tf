@@ -11,4 +11,8 @@ resource "aws_db_instance" "RDS" {
   password             = random_string.divy_db.result
   storage_type         = var.db_storage_type
   skip_final_snapshot  = true
+
+  depends_on = [
+    module.vpc
+  ]
 }

@@ -1,7 +1,7 @@
 resource "aws_elasticache_replication_group" "divy_elasticache" {
   replication_group_id       = var.divy_elasticache_id
   description                = var.divy_elasticache_description
-  node_type                  = var.divy_elasticache_parameter_group_name
+  node_type                  = var.divy_elasticache_node_type
   num_cache_clusters         = var.divy_elasticache_num_nodes
   parameter_group_name       = var.divy_elasticache_parameter_group_name
   subnet_group_name          = var.elasticache_subnet_group_name
@@ -9,6 +9,10 @@ resource "aws_elasticache_replication_group" "divy_elasticache" {
   auth_token                 = random_string.divy_elasticache.result
   at_rest_encryption_enabled = true
   transit_encryption_enabled = true
+
+  depends_on = [
+    module.vpc
+  ]
 }
 
 resource "aws_elasticache_replication_group" "soarcast_elasticache" {
@@ -22,4 +26,8 @@ resource "aws_elasticache_replication_group" "soarcast_elasticache" {
   auth_token                 = random_string.soarcast_elasticache.result
   at_rest_encryption_enabled = true
   transit_encryption_enabled = true
+
+  depends_on = [
+    module.vpc
+  ]
 }
