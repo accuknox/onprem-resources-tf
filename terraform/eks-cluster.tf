@@ -15,12 +15,12 @@ module "eks" {
 
   node_security_group_additional_rules = {
     inress_ec2_tcp = {
-      description                = "Open pulsar access in private network"
-      protocol                   = "tcp"
-      from_port                  = 80
-      to_port                    = 80
-      type                       = "ingress"
-      cidr_blocks            = var.private_subnets
+      description = "Open pulsar access in private network"
+      protocol    = "tcp"
+      from_port   = 80
+      to_port     = 80
+      type        = "ingress"
+      cidr_blocks = var.private_subnets
     }
   }
 
