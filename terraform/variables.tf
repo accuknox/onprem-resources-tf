@@ -2,7 +2,7 @@
   Global variables
 */
 variable "region" {
-  default = "us-east-2"
+  #default = "us-east-2"
 }
 
 variable "elasticache_subnet_group_name" {
@@ -36,13 +36,13 @@ variable "database_subnets" {
 
 variable "domain" {
   type    = string
-  default = "www.accuknox.com"
+  #default = "example.com"
 }
 
 variable "name" {
   type        = string
   description = "Name of the IAM user"
-  default     = "smpt"
+  #default     = "smpt"
 }
 
 variable "user_policy_name_prefix" {
