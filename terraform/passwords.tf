@@ -6,22 +6,22 @@ resource "vault_mount" "kvv2" {
 }
 
 module "divy_db" {
-  source = "./vault-rand-password"
-  secret_name = "divy/db"
-  mount_path = vault_mount.kvv2.path
+  source          = "./vault-rand-password"
+  secret_name     = "divy/db"
+  mount_path      = vault_mount.kvv2.path
   password_length = 16
 }
 
 module "divy_elasticache" {
-  source = "./vault-rand-password"
+  source      = "./vault-rand-password"
   secret_name = "divy/elasticache"
-  mount_path = vault_mount.kvv2.path
+  mount_path  = vault_mount.kvv2.path
 }
 
 module "soarcast_elasticache" {
-  source = "./vault-rand-password"
+  source      = "./vault-rand-password"
   secret_name = "soarcast/elasticache"
-  mount_path = vault_mount.kvv2.path
+  mount_path  = vault_mount.kvv2.path
 }
 
 resource "vault_kv_secret_v2" "vault_entry" {
@@ -29,8 +29,8 @@ resource "vault_kv_secret_v2" "vault_entry" {
   name  = "aws/ecr"
   data_json = jsonencode(
     {
-      aws_access_key_id: "",
-      aws_secret_access_key: "",
+      aws_access_key_id : "",
+      aws_secret_access_key : "",
     }
   )
 }

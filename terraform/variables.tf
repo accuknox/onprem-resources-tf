@@ -35,7 +35,7 @@ variable "database_subnets" {
 */
 
 variable "domain" {
-  type    = string
+  type = string
   #default = "example.com"
 }
 
