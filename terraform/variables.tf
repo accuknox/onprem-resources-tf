@@ -48,7 +48,7 @@ variable "name" {
 variable "user_policy_name_prefix" {
   type        = string
   description = "Name prefix of the IAM policy that is assigned to the user"
-  default     = "SESSendOnlyAccess"
+  default     = "accuknox-SESSendOnlyAccess"
 }
 
 variable "path" {
